@@ -1,5 +1,5 @@
 const API_KEY = `fcf420e215274c94ad037440fcbb825f`;
-let news = [];
+let newsList = [];
 
 const getLatestNews = async () => {
   // URL : URL 인스턴스 -> url에 필요한 함수와 변수들을 제공함
@@ -14,8 +14,8 @@ const getLatestNews = async () => {
   const data = await response.json();
   console.log("data: ", data);
 
-  news = data.articles;
-  console.log("data.articles: ", news);
+  newsList = data.articles;
+  console.log("data.articles: ", newsList);
   render();
 };
 
