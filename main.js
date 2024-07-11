@@ -1,7 +1,6 @@
 const API_KEY = `fcf420e215274c94ad037440fcbb825f`;
 let newsList = [];
 const menus = document.querySelectorAll(".menus button");
-// console.log("menus: ", menus);
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
@@ -16,56 +15,39 @@ document
       getNewsByKeyword();
     }
   });
+let url = new URL(
+  `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
+);
+
+const getNews = async () => {
+  const response = await fetch(url);
+  const data = await response.json();
+  newsList = data.articles;
+  render();
+};
 
 const getLatestNews = async () => {
-  // URL : URL 인스턴스 -> url에 필요한 함수와 변수들을 제공함
-  const url = new URL(
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
   );
-  console.log("url: ", url); // url 확인
-
-  const response = await fetch(url); // fetch : url 호출(해당 url의 데이터를 가져옴)
-  console.log("response: ", response);
-
-  const data = await response.json();
-  console.log("data: ", data);
-
-  newsList = data.articles;
-  console.log("data.articles: ", newsList);
-
-  render();
+  getNews();
 };
 
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
-  console.log("category: ", category); // 카테고리 눌렀을 때 클릭 이벤트 잘 작동하는지 확인
-  const url = new URL(
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
   );
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("data: ", data);
-
-  newsList = data.articles;
-
-  render();
+  getNews();
 };
 
 const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
-  console.log("keyword: ", keyword); // 카테고리 눌렀을 때 클릭 이벤트 잘 작동하는지 확인
-  const url = new URL(
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
   );
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("keyword data: ", data);
-
-  newsList = data.articles;
-
+  getNews();
   document.getElementById("search-input").value = "";
-
-  render();
 };
 
 const openNav = () => {
