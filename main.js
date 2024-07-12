@@ -41,7 +41,7 @@ const getLatestNews = async () => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
 };
 
 const getNewsByCategory = async (event) => {
@@ -49,7 +49,7 @@ const getNewsByCategory = async (event) => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
 };
 
 const getNewsByKeyword = async () => {
@@ -57,7 +57,7 @@ const getNewsByKeyword = async () => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
   document.getElementById("search-input").value = "";
 };
 
