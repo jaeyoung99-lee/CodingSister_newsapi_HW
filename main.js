@@ -156,7 +156,7 @@ const paginationRender = () => {
 
   for (let i = firstPage; i <= lastPage; i++) {
     paginationHTML += `<li class="page-item ${
-      i === page ? active : ""
+      i === page ? "active" : ""
     }" onclick="moveToPage(${i})">
         <a class="page-link" href="#">
           ${i}
