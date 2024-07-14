@@ -53,6 +53,7 @@ const getLatestNews = async () => {
 };
 
 const getNewsByCategory = async (event) => {
+  page = 1; // 페이지를 1로 초기화
   const category = event.target.textContent.toLowerCase();
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
