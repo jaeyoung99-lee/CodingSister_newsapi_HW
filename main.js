@@ -149,10 +149,13 @@ const paginationRender = () => {
     lastPage = totalPage;
   }
   // firstPage
-  const firstPage =
+  let firstPage =
     lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
 
-  let paginationHTML = `<li class="page-item" onclick="moveToPage(${
+  let paginationHTML = ``;
+
+  paginationHTML = `<li class="page-item" id="previous-button1" onclick="moveToPage(1)"><a class="page-link" href="#">&lt;&lt;</a></li>`;
+  paginationHTML += `<li class="page-item" id="previous-button2" onclick="moveToPage(${
     page - 1
   })"><a class="page-link" href="#">&lt;</a></li>`;
 
@@ -166,17 +169,35 @@ const paginationRender = () => {
       </li>`;
   }
 
-  paginationHTML += `<li class="page-item" onclick="moveToPage(${
+  paginationHTML += `<li class="page-item" id="next-button1" onclick="moveToPage(${
     page + 1
   })"><a class="page-link" href="#">&gt;</a></li>`;
+  paginationHTML += `<li class="page-item" id="next-button2" onclick="moveToPage(${totalPage})"><a class="page-link" href="#">&gt;&gt;</a></li>`;
 
   document.querySelector(".pagination").innerHTML = paginationHTML;
+
+  toggleNavigationButtons(page, totalPage);
 };
 
 const moveToPage = (pageNum) => {
   console.log("moveToPage : ", pageNum);
   page = pageNum;
   getNews();
+};
+
+const toggleNavigationButtons = (page, totalPage) => {
+  document
+    .getElementById("previous-button1")
+    .classList.toggle("hidden", page <= 1);
+  document
+    .getElementById("previous-button2")
+    .classList.toggle("hidden", page <= 1);
+  document
+    .getElementById("next-button1")
+    .classList.toggle("hidden", page >= totalPage);
+  document
+    .getElementById("next-button2")
+    .classList.toggle("hidden", page >= totalPage);
 };
 
 getLatestNews();
